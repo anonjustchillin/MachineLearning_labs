@@ -28,31 +28,41 @@ def esi_start():
 
     # 4. Гістограми для всіх можливих параметрів
 
-    plt.hist(esi, color='lightgreen', edgecolor='black')
-    plt.xlabel('ІЕН')
+    years = ['2020', '2021', '2022', '2023', '2024', '2025']
+    quarter = ['Квартал 1', 'Квартал 2', 'Квартал 3', 'Квартал 4']
+
+    esi_mean = [round(sts.mean(esi_2020), 6),
+                round(sts.mean(esi_2021), 6),
+                round(sts.mean(esi_2022), 6),
+                round(sts.mean(esi_2023), 6),
+                round(sts.mean(esi_2024), 6),
+                round(sts.mean(esi_2025), 6)]
+
+    plt.bar(years, esi_mean, color='lightgreen', edgecolor='black')
+    plt.xlabel('ІЕН (Середні значення)')
     plt.ylabel('')
     plt.title('ІЕН 2020-2025')
     plt.show()
 
-    fig, axs = plt.subplots(ncols=3, nrows=2, figsize=(6, 4), layout="constrained")
-    axs[0, 0].hist(esi_2020, bins=5, color='lightgreen', edgecolor='black')
+    fig, axs = plt.subplots(ncols=3, nrows=2, figsize=(12, 4), layout="constrained")
+    axs[0, 0].bar(quarter, esi_2020, color='lightcoral', edgecolor='black')
     axs[0, 0].title.set_text('2020')
-    
-    axs[0, 1].hist(esi_2021, bins=5, color='lightgreen', edgecolor='black')
+
+    axs[0, 1].bar(quarter, esi_2021, color='moccasin', edgecolor='black')
     axs[0, 1].title.set_text('2021')
-    
-    axs[0, 2].hist(esi_2022, bins=5, color='lightgreen', edgecolor='black')
+
+    axs[0, 2].bar(quarter, esi_2022, color='yellowgreen', edgecolor='black')
     axs[0, 2].title.set_text('2022')
-    
-    axs[1, 0].hist(esi_2023, bins=5, color='lightgreen', edgecolor='black')
+
+    axs[1, 0].bar(quarter, esi_2023, color='powderblue', edgecolor='black')
     axs[1, 0].title.set_text('2023')
-    
-    axs[1, 1].hist(esi_2024, bins=5, color='lightgreen', edgecolor='black')
+
+    axs[1, 1].bar(quarter, esi_2024, color='lavender', edgecolor='black')
     axs[1, 1].title.set_text('2024')
-    
-    axs[1, 2].hist(esi_2025, bins=5, color='lightgreen', edgecolor='black')
+
+    axs[1, 2].bar(quarter[0], esi_2025, color='pink', edgecolor='black')
     axs[1, 2].title.set_text('2025')
-    
+
     fig.suptitle('ІЕН 2020-2025')
     plt.show()
 
