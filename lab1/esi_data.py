@@ -4,41 +4,31 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def esi_plot(esi_2020, esi_2021, esi_2022, esi_2023, esi_2024, esi_2025):
-    years = ['2020', '2021', '2022', '2023', '2024', '2025']
-    quarter = ['Квартал 1', 'Квартал 2', 'Квартал 3', 'Квартал 4']
-    esi_mean = [round(sts.mean(esi_2020), 6),
-                round(sts.mean(esi_2021), 6),
-                round(sts.mean(esi_2022), 6),
-                round(sts.mean(esi_2023), 6),
-                round(sts.mean(esi_2024), 6),
-                round(sts.mean(esi_2025), 6)]
-
+def esi_plot(esi, esi_2020, esi_2021, esi_2022, esi_2023, esi_2024, esi_2025):
     # гістограма 1. середні значення ІЕН
-    plt.bar(years, esi_mean, color='lightgreen', edgecolor='black')
-    plt.xlabel('ІЕН (Середні значення)')
+    plt.hist(esi, bins=6, color='lightgreen', edgecolor='black')
+    plt.xlabel('ІЕН')
     plt.ylabel('')
     plt.title('ІЕН 2020-2025')
-    plt.show()
 
     # гістограми 2. переглад ІЕН по кварталам з 2020 по 2025
     fig, axs = plt.subplots(ncols=3, nrows=2, figsize=(12, 4), layout="constrained")
-    axs[0, 0].bar(quarter, esi_2020, color='lightcoral', edgecolor='black')
+    axs[0, 0].hist(esi_2020, bins=3, color='lightcoral', edgecolor='black')
     axs[0, 0].title.set_text('2020')
 
-    axs[0, 1].bar(quarter, esi_2021, color='moccasin', edgecolor='black')
+    axs[0, 1].hist(esi_2021, bins=3, color='moccasin', edgecolor='black')
     axs[0, 1].title.set_text('2021')
 
-    axs[0, 2].bar(quarter, esi_2022, color='yellowgreen', edgecolor='black')
+    axs[0, 2].hist(esi_2022, bins=3, color='yellowgreen', edgecolor='black')
     axs[0, 2].title.set_text('2022')
 
-    axs[1, 0].bar(quarter, esi_2023, color='powderblue', edgecolor='black')
+    axs[1, 0].hist(esi_2023, bins=3, color='powderblue', edgecolor='black')
     axs[1, 0].title.set_text('2023')
 
-    axs[1, 1].bar(quarter, esi_2024, color='lavender', edgecolor='black')
+    axs[1, 1].hist(esi_2024, bins=3, color='lavender', edgecolor='black')
     axs[1, 1].title.set_text('2024')
 
-    axs[1, 2].bar(quarter[0], esi_2025, color='pink', edgecolor='black')
+    axs[1, 2].hist(esi_2025, bins=3, color='pink', edgecolor='black')
     axs[1, 2].title.set_text('2025')
 
     fig.suptitle('ІЕН 2020-2025')
@@ -213,7 +203,7 @@ def esi_start():
     esi_2024 = [102.7, 109.6, 105.1, 103.4]
     esi_2025 = [106.1]
     esi = esi_2020 + esi_2021 + esi_2022 + esi_2023 + esi_2024 + esi_2025
-    print("Вибірка\n", esi)
+    print("Дані ІЕН\n", esi)
 
     # 3. Мат. сподівання, медіана, мода, дисперсія, середньоквадратичне відхилення
     print(f"Математичне сподівання = {round(sts.mean(esi), 6)}")
@@ -224,7 +214,7 @@ def esi_start():
     print(f"Середньоквадратичне відхилення (sqrt(pvariance)) = {round(np.sqrt(sts.pvariance(esi)), 6)}")
 
     # 4. Гістограми для всіх можливих параметрів
-    esi_plot(esi_2020, esi_2021, esi_2022, esi_2023, esi_2024, esi_2025)
+    esi_plot(esi, esi_2020, esi_2021, esi_2022, esi_2023, esi_2024, esi_2025)
 
     # 5. Для цих даних проробити всі дії з пункту колекції Series, DataFrame
     esi_series_func(esi, esi_2020, esi_2021, esi_2022, esi_2023, esi_2024, esi_2025)
